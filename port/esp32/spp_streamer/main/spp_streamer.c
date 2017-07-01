@@ -200,6 +200,7 @@ static void packet_handler (uint8_t packet_type, uint16_t channel, uint8_t *pack
 
                 case RFCOMM_EVENT_CHANNEL_CLOSED:
                     printf("RFCOMM channel closed\n");
+                    rfcomm_disconnect(rfcomm_cid);
                     rfcomm_cid = 0;
 
                     // re-enable page/inquiry scan again
@@ -257,7 +258,7 @@ int btstack_main(int argc, const char * argv[])
     sdp_register_service(spp_service_buffer);
     // printf("SDP service record size: %u\n", de_get_len(spp_service_buffer));
 
-    gap_ssp_set_io_capability(SSP_IO_CAPABILITY_DISPLAY_YES_NO);
+    gap_ssp_set_io_capability(IO_CAPABILITY_NO_INPUT_NO_OUTPUT);
 
     // short-cut to find other SPP Streamer
     gap_set_class_of_device(TEST_COD);
