@@ -199,7 +199,7 @@ static void packet_handler (uint8_t packet_type, uint16_t channel, uint8_t *pack
                     break;
 
                 case RFCOMM_EVENT_CHANNEL_CLOSED:
-                    printf("RFCOMM channel closed\n");
+                    printf("RFCOMM channel %u closed. Disconnecting from the channel...\n", rfcomm_cid);
                     rfcomm_disconnect(rfcomm_cid);
                     rfcomm_cid = 0;
 
